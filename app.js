@@ -1,12 +1,18 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+'use strict';
 
-var clients = {}; 
+const express = require('express');
+const socketIO = require('socket.io');
 
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/index.html');
-});
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+
+const io = socketIO(server);
+
+const clients = {};
 
 io.on("connection", function (client) {  
     client.on("join", function(name){
@@ -27,9 +33,4 @@ io.on("connection", function (client) {
         io.emit("update", clients[client.id] + " saiu da sala.");
         delete clients[client.id];
     });
-});
-
-
-http.listen(3000, function(){
-    console.log('Servidor rodando em: http://localhost:3000');
 });

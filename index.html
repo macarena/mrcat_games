@@ -53,6 +53,7 @@
           console.log(msg);
           socket.emit('send', msg);
           document.getElementById('menssagem').value = "";
+          newMessage("eu", msg);
       }
     }
 
@@ -65,15 +66,19 @@
     });
 
     socket.on('chat', function(user, msg){
-        let ul = document.getElementById("messages");
-        let li = document.createElement('li');
-        let br = document.createElement('br');
-        li.appendChild(document.createTextNode(user + ": " + msg));
-        ul.appendChild(li);
+        newMessage(user, msg);
     });
 
     socket.on('online_users', function(users){
         console.log(users);
     });
+
+    function newMessage(user, msg) {
+        let ul = document.getElementById("messages");
+        let li = document.createElement('li');
+        let br = document.createElement('br');
+        li.appendChild(document.createTextNode(user + ": " + msg));
+        ul.appendChild(li);
+    }
  
     </script>
