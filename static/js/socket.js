@@ -20,11 +20,7 @@ if (nome_usuario === null || nome_usuario == "" || nome_usuario == " ") {
 socket.emit('join', nome_usuario);
 
 socket.on('update', function(msg){
-    let ul = document.getElementById("messages");
-    let li = document.createElement('li');
-    let br = document.createElement('br');
-    li.appendChild(document.createTextNode(msg));
-    ul.appendChild(li);
+    addMessage(msg);
 });
 
 socket.on('chat', function(user, msg){
@@ -34,11 +30,3 @@ socket.on('chat', function(user, msg){
 socket.on('online_users', function(users){
     console.log(users);
 });
-
-function newMessage(user, msg) {
-    let ul = document.getElementById("messages");
-    let li = document.createElement('li');
-    let br = document.createElement('br');
-    li.appendChild(document.createTextNode(user + ": " + msg));
-    ul.appendChild(li);
-}
