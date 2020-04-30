@@ -15,7 +15,7 @@
   "homepage": "https://github.com/macarena/mrcat_games#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "socket.io-client": "^2.3.0",
     "socketio": "^1.0.0"
   }
